@@ -1,0 +1,85 @@
+/* CSS Document */
+body{
+background-color:#FFFFFF;
+}
+.wrapper{
+width:900px;
+margin-top:70px;
+
+margin-left:auto;
+margin-right:auto;
+
+}
+a{
+text-decoration:none;
+}
+a:visited{
+color:#003399;
+}
+a:hover{
+text-decoration:underline;
+}
+#headers{
+margin-left:200px;
+font-size:25px;
+color:#365D95;
+}
+#ejobjob{
+color:#CC9999;
+font-weight:bold;
+}
+#copyright{
+text-align:center;
+color:#999999;
+}
+#signin{
+width:200px;
+background-color:#EAEBEE;
+border:#365D95 1px solid;
+float:left;
+margin-right:30px;
+}
+#si{
+font-size:20px;
+color:#000099;
+margin-bottom:15px;
+}
+#info{
+
+width:665px;
+font-size:16px;
+}
+#login{
+margin-left:10px;
+
+}
+#forget{
+float:right;
+margin-right:10px;
+}
+#footer{
+text-align:center;
+color:#0033FF;
+}
+.notice {
+  display: block;
+  padding: 5px;	
+  color: #6A0201;	
+	border: 1px solid #FF6666;;
+	margin-top: 10px;
+	margin-left:220px;
+	
+	text-align:center;
+}
+
+.warning {
+ 
+	display: block;
+  	padding: 5px;	
+  	color: #6A0201;	
+	border: 1px solid #FF0000;
+	margin-top: 10px;
+	margin-left:220px;
+	
+	text-align:center;
+}
