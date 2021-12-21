@@ -134,7 +134,7 @@ while($row = mysqli_fetch_array($result))
 <?php 
 if(isset($_POST['submit'])){
     
-$name = $_POST['name'];
+//$name = $_POST['name'];
 $capitalized_in_birr_result = $_POST['capitalized_in_birr'];
 $capitalized_in_birr = preg_replace('/[ ,]+/', '', trim($capitalized_in_birr_result));
 
@@ -143,7 +143,7 @@ $shareValue_row = mysqli_fetch_array($shareValue_request);
 $shareValue=$shareValue_row?$shareValue_row['share_value']:0;
 
 $capitalized_share = $capitalized_in_birr/$shareValue;
-$account_no = $_POST['account_no'];
+$account_no = $_POST['shareholder'];
  
 $value_date = $_POST['value_date'];
 $currentDate = $value_date;
@@ -160,12 +160,12 @@ echo '<script>alert("Value date is out of budget year!");</script>';
     $value_date = $_POST['value_date'];
 
   
-    $allotment_query = mysqli_query($conn,"SELECT * from allotment where account = '$acct' and year=$year and allot_status=4 order by id ASC") or die(mysqli_error($conn));
+    $allotment_query = mysqli_query($conn,"SELECT * from allotment where account = '$account_no' and year=$year and allot_status=4 order by id ASC") or die(mysqli_error($conn));
     $allotment_row = mysqli_fetch_array($allotment_query);
     $allotment=$allotment_row?$allotment_row['allotment']:0;
     $allot_date=$allotment_row?$allotment_row['allot_date']:"";
 
-    $capitalized_query = mysqli_query($conn,"SELECT sum(capitalized_in_birr) as capitalized_in_birr from capitalized where account = '$acct'and capitalized_status in(4,3) and year=$year order by id ASC") or die(mysqli_error($conn));
+    $capitalized_query = mysqli_query($conn,"SELECT sum(capitalized_in_birr) as capitalized_in_birr from capitalized where account = '$account_no'and capitalized_status in(4,3) and year=$year order by id ASC") or die(mysqli_error($conn));
     $capitalized_row = mysqli_fetch_array($capitalized_query);
     $capitalized=$capitalized_row?$capitalized_row['capitalized_in_birr']:0;
     $check_allot=$allotment*$shareValue-$capitalized;

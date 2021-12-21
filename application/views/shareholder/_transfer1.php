@@ -49,7 +49,7 @@ if(isset($_POST['submitTransfer']) && $budget_result){
         $shareholdersUpdate = mysqli_query($conn,"UPDATE shareholders set nextYear_status = 2, closed_date='$transfer_date', closed_year=$year WHERE account_no = '$acct'") or die(mysqli_error($conn));
       }
 //will update here
-      $query = mysqli_query($conn,"INSERT INTO transfer (seller_account,buyer_account_no,total_transfered_in_birr,transfer_date,value_date,status_of_transfer,year,agreement,transfer_type,maker,full_transfer) 
+      $query = mysqli_query($conn,"INSERT INTO transfer (seller_account,buyer_account,total_transfered_in_birr,transfer_date,value_date,status_of_transfer,year,agreement,transfer_type,maker,full_transfer) 
       VALUES ('$account_no','$raccount_no',$total_transfered_in_birr,'$transfer_date','$value_date',3,$year,$agreement,$transfer_type,$userId,true)"
      ) or die(mysqli_error($conn));
      $transfered="yes";
@@ -58,7 +58,7 @@ if(isset($_POST['submitTransfer']) && $budget_result){
     if($agreement==3 && $total_fromIntially_can_transfer < $howmany){
       $transfered="amount";
     }else{
-      $query = mysqli_query($conn,"INSERT INTO transfer (seller_account,buyer_account_no,total_transfered_in_birr,transfer_date,value_date,status_of_transfer,year,agreement,transfer_type,maker,full_transfer) 
+      $query = mysqli_query($conn,"INSERT INTO transfer (seller_account,buyer_account,total_transfered_in_birr,transfer_date,value_date,status_of_transfer,year,agreement,transfer_type,maker,full_transfer) 
       VALUES ('$account_no','$raccount_no',$total_transfered_in_birr,'$transfer_date','$value_date',3,$year,$agreement,$transfer_type,$userId,false)"
       ) or die(mysqli_error($conn));
       $transfered="yes";
@@ -108,7 +108,7 @@ elseif($_GET['transfer']=="account"){
 
 <div class="alert alert-danger alert-dismissable" role="alert">
     <div class='message'>
-    self transfer is forbidden! try again for an othe account.
+    Self transfer is forbidden! try again for an othe account.
   </div>
 </div>
 <?php }
@@ -250,7 +250,7 @@ if($row && $budget_result){
             <?php
     
             $name = $row['name'];
-            $result = mysqli_query($conn,"SELECT * FROM shareholders where currentYear_status = 1 group by name order by account_no");
+            $result = mysqli_query($conn,"SELECT * FROM shareholders where currentYear_status = 1 group by name order by cast(account_no as int)");
             while($row2 = mysqli_fetch_array($result))
               {
                 echo '<option value="'.$row2['account_no'].'">';

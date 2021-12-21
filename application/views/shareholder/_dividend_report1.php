@@ -82,7 +82,7 @@ if(isset($_POST['search'])) {
   //echo "<h1>".$countNumber."</h1>";
   
   
-$paidup_utilized = mysqli_query($conn,"SELECT SUM(amount) as total_amount from paidup_utilized where year = $year") or die(mysqli_error($conn));
+$paidup_utilized = mysqli_query($conn,"SELECT SUM(total_utilized_paidup_capital) as total_amount from dividend_report where year = $year") or die(mysqli_error($conn));
  $total_paidup_utilized = mysqli_fetch_array($paidup_utilized);
 
  $dividend_amt = mysqli_query($conn,"SELECT * from dividend_amount where year = $year ") or die(mysqli_error($conn));

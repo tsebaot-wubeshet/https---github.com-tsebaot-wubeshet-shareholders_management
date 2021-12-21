@@ -190,7 +190,7 @@
             </div>
             <?php }if($total_blocked!=0){ ?>
             <div class="form-group">
-                <label>Total plugged share(in birr)</label>
+                <label>Total blocked share(in birr)</label>
             <input type="text" required readonly name="blocked" autofocus class="form-control" value="<?php echo $total_blocked; ?>">
             </div>
             <?php }?>

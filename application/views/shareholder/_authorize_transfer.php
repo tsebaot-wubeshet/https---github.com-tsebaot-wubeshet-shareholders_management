@@ -53,7 +53,6 @@ if(isset($_GET['reject'])){
          <thead>
             <tr>
                 <th></th>
-                <th></th>
                 <th>No.</th>
                 <th>Seller Account number</th>
                 <th>Seller Name</th>
@@ -101,7 +100,6 @@ if(isset($_GET['reject'])){
 
                 <td><input type="checkbox" name="id[]" value="<?php echo $rows['id']; ?>"></td>
                 
-                <td><!--<input type="Checkbox" name="applist[]" value="<?php //echo $rows['id'];?>">--></td>
 
                 <td><?php echo $a; ?></td>
                 
@@ -155,11 +153,17 @@ if(isset($_GET['reject'])){
     <?php
                         
  if (isset($_POST['authorize'])){
+    $this->db->where('budget_status', '1');
+    $query = $this->db->get('budget_year');
+    $active_budget_year = $query->row()->id;
      if(isset($_POST['id'])){
         $id = $_POST['id'];
-        foreach ($_POST['id'] as $ids) {            
+        foreach ($_POST['id'] as $ids) {     
+            $this->db->where('id', $ids);
+            $transferred_amount = $this->db->get('transfer')->row()->total_transfered_in_birr;       
       
             $result4 = mysqli_query($conn,"UPDATE transfer SET status_of_transfer = 4, checker=$userId where id='$ids'")or die(mysqli_error($conn));        
+            // $result5 = mysqli_query($conn,"UPDATE balance SET total_paidup_capital_inbirr = total_paidup_capital_inbirr - $transferred_amount where year = $active_budget_year")or die(mysqli_error($conn));        
             }     
         header("location:authorize_transfer?authorize=true&from=".$from.'&to='.$to);
     }else{

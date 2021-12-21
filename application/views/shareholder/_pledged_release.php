@@ -59,7 +59,7 @@
                                             
 <?php
        
-    $query = mysqli_query($conn,"SELECT * from pludge where pledged_status = 7") or die(mysqli_error($conn));
+    $query = mysqli_query($conn,"SELECT p.*, s.name, b.total_paidup_capital_inbirr from pludge p LEFT JOIN shareholders s ON s.account_no = p.account LEFT JOIN balance b ON b.account = p.account where pledged_status = 7") or die(mysqli_error($conn));
                                             
             $a = 0;
             
@@ -70,11 +70,13 @@
             <tr>
 
                 <td><input type="checkbox" name="applist[]" value="<?php echo $rows['id'];?>"></td>
-                <td><input type="checkbox" name="selector[]" value="<?php echo $rows['account_no'];?>">
+                <td><input type="checkbox" name="selector[]" value="<?php echo $rows['account'];?>">
                 
                 <td><?php echo $a; ?></td>
                 
                 <td><?php echo $rows['account']; ?></td>
+                <td><?php echo $rows['name']; ?></td>
+                <td><?php echo $rows['total_paidup_capital_inbirr'] - $rows['pledged_amount']; ?></td>
                 <td><?php echo $rows['pledged_amount'];?></td>
                 <td><?php echo $rows['pledged_reason']; ?></td>
                 <td>

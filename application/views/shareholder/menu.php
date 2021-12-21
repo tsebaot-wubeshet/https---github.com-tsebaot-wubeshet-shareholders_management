@@ -41,14 +41,14 @@ $year=$budget_result['id'];
                             </a>                                          
                       <ul class="treeview-menu">        
                                     <?php 
-                                        $result1 = mysqli_query($conn,"SELECT count(id) from share_request where share_request_status = 'pending'");
+                                        $result1 = mysqli_query($conn,"SELECT count(id) from shareholders where currentYear_status=3");
                                         $rowss = mysqli_fetch_array($result1); 
                                     ?>
 
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/authorize_new_shareholder?from=<?php echo $from; ?>&to=<?php echo $to; ?>"><i class="fa fa-angle-double-right"></i>New Shareholders<?php if($rowss['count(id)'] == '0'){ } else { ?><span class="badge bg-red"><?php echo $rowss['count(id)']; ?><?php } ?></a></li>
                                 <?php 
                               
-                                $query2 = mysqli_query($conn,"SELECT count(id) from blocked where blocked_status = 3");
+                                $query2 = mysqli_query($conn,"SELECT count(id) from blocked where blocked_status = 8");
                   
                                 $row2 = mysqli_fetch_array($query2);
 
@@ -66,7 +66,7 @@ $year=$budget_result['id'];
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/release_blocked"><i class="fa fa-angle-double-right"></i>Released Blocked  <?php if($row1212['count(id)'] == '0'){ } else { ?><span class="badge bg-red"><?php echo $row1212['count(id)']; ?><?php } ?></a></li>
                                 <?php 
                               
-                                $query3 = mysqli_query($conn,"SELECT count(id) from pludge where pledged_status = 3");
+                                $query3 = mysqli_query($conn,"SELECT count(id) from pludge where pledged_status = 9");
                   
                                 $row3 = mysqli_fetch_array($query3);
 
@@ -74,7 +74,7 @@ $year=$budget_result['id'];
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/pledged"><i class="fa fa-angle-double-right"></i>Pledge Shareholders <?php if($row3['count(id)'] == '0'){ } else { ?><span class="badge bg-red"><?php echo $row3['count(id)']; ?><?php } ?></span></a></li>
                                 <?php 
                               
-                                $query23 = mysqli_query($conn,"SELECT count(id) from pludge where pledged_status = 10");
+                                $query23 = mysqli_query($conn,"SELECT count(id) from pludge where pledged_status = 7");
                   
                                 $row23 = mysqli_fetch_array($query23);
 
@@ -124,6 +124,22 @@ $year=$budget_result['id'];
 
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/certificate?from=<?php echo $from; ?>&to=<?php echo $to; ?>"><i class="fa fa-angle-double-right"></i>Certificate</a></li>
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/certificate_report"><i class="fa fa-angle-double-right"></i>Certificate Report</a></li>
+                            </ul>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+
+                        <i class="fa fa-gear"></i>
+                                <span>Dividend Calculation</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                
+                                <li class="active"><a href="<?php echo base_url('');?>shareholder/add_dividend"><i class="fa fa-angle-double-right"></i>Add Dividend Profit</a></li>
+
+                                <li class="active"><a href="<?php echo base_url('');?>shareholder/edit_dividend"><i class="fa fa-angle-double-right"></i>Edit Dividend Profit</a></li>
                             </ul>
 
                         </li>
@@ -300,7 +316,7 @@ $year=$budget_result['id'];
 
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/manage_allotement"><i class="fa fa-angle-double-right"></i>New Allotment</a></li>
                                 <li class="active"><a href="<?php echo base_url('');?>shareholder/list_allotment"><i class="fa fa-angle-double-right"></i>List Allotment</a></li>
-                                <li class="active"><a href="<?php echo base_url('');?>shareholder/upload_allotement"><i class="fa fa-angle-double-right"></i>Upload New Allotement</a></li>
+                                <!-- <li class="active"><a href="<?php //echo base_url('');?>shareholder/upload_allotement"><i class="fa fa-angle-double-right"></i>Upload New Allotement</a></li> -->
                                 
                 </ul>
             </li>          
@@ -354,22 +370,7 @@ $year=$budget_result['id'];
 
                         </li>
 
-                        <li class="treeview">
-                            <a href="#">
-
-                        <i class="fa fa-gear"></i>
-                                <span>Dividend Calculation</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-
-                                
-                                <li class="active"><a href="<?php echo base_url('');?>shareholder/add_dividend"><i class="fa fa-angle-double-right"></i>Add Dividend Profit</a></li>
-
-                                <li class="active"><a href="<?php echo base_url('');?>shareholder/edit_dividend"><i class="fa fa-angle-double-right"></i>Edit Dividend Profit</a></li>
-                            </ul>
-
-                        </li>
+                        
                         <li class="treeview">
                             <a href="#">
 

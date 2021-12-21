@@ -1,19 +1,19 @@
 <?php
-$conn=mysqli_connect('localhost','root','','shareholder');
-if (isset($this->session->userdata['logged_in'])) {
-
-$username = $this->session->userdata['logged_in']['username'];
-$role = $this->session->userdata['logged_in']['role'];  
-$userId= $this->session->userdata['logged_in']['id'];  
-} 
+    $conn=mysqli_connect('localhost','root','','shareholder');
+    if (isset($this->session->userdata['logged_in'])) 
+    {
+        $username = $this->session->userdata['logged_in']['username'];
+        $role = $this->session->userdata['logged_in']['role'];  
+        $userId= $this->session->userdata['logged_in']['id'];  
+    } 
 ?> 
 <?php if(isset($_GET['pledged'])){ ?>
     
-<div class="alert alert-success alert-dismissable">
-    <i class="fa fa-ban"></i>
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <b>Success!</b> Pledged Authorized Successfully!.
-</div>
+    <div class="alert alert-success alert-dismissable">
+        <i class="fa fa-ban"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <b>Success!</b> Pledged Authorized Successfully!.
+    </div>
     
 <?php } ?>
                 <!-- Main content -->
@@ -22,34 +22,23 @@ $userId= $this->session->userdata['logged_in']['id'];
                         <div class="col-xs-12">
                            <div class="box">
                                 
-                                <div class="box-body table-responsive">
+                           <div class="box-body table-responsive">
                                 <form action="" method="POST">
                                     <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
+                                    <thead>
                                             <tr>
-                                                <th>No.</th>
-
                                                 <th></th>
-
                                                 <th></th>
-
-                                                <th></th>
-                                                
+                                                <th>No.</th> 
                                                 <th>Account number</th>
-
                                                 <th>Shareholder Name</th>
-
-                                                <th>Pludged Amount</th>
-                                                
+                                                <th>Pledged Amount</th>         
                                                 <th>Reason</th>
-
-                                               </tr>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             
-                                            <?php
-                                            
-       $query = mysqli_query($conn,"SELECT * from pludge where pledged_status = 9 order by id ASC") or die(mysqli_error($conn));
+                                            <?php  $query = mysqli_query($conn,"SELECT p.*, s.name from pludge p LEFT JOIN shareholders s ON s.account_no = p.account where pledged_status = 9 order by id ASC") or die(mysqli_error($conn));
                                             
                                             $a = 0;
                                             
@@ -60,26 +49,21 @@ $userId= $this->session->userdata['logged_in']['id'];
                                             ?>
                                             <tr>
 
-                                    
-
-                                                <td><?php echo $a; ?></td>
-
                                                 <td><input type="checkbox" name="selector[]" value="<?php echo $rows['id']; ?>"></td>
 
                                                 <td><input type="checkbox" name="applist[]" value="<?php echo $rows['account'];?>"></td>
 
-                                                <td></td>
+                                                <td><?php echo $a; ?></td>
+
+                                                <td><?php echo $rows['name']; ?></td>
                                                 
                                                 <td><?php echo $rows['account']; ?></td>
 
                                                 <td><?php echo $rows['pledged_amount']; ?></td>
                                                 
                                                 <td><?php echo $rows['pledged_reason']; ?></td>
-                                                                                             
+                                             <?php } ?>                                       
                                             </tr>
-
-                                            <?php } ?>
-                                            
                                         </tbody>
                                    
                             <?php if($role == 3){?> 
@@ -96,7 +80,16 @@ $userId= $this->session->userdata['logged_in']['id'];
 
                                     </table>
 
-                                    <?php 
+                                    
+                           
+                                   </form> 
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div>
+                    </div>
+
+                </section><!-- /.content -->
+                <?php 
 
                                      if (isset($_POST['authorize']) ){
                                      if(isset($_POST['applist'])) {
@@ -143,12 +136,4 @@ $userId= $this->session->userdata['logged_in']['id'];
                                     }
                                 }
                                     ?>
-                           
-                                   </form> 
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
-                        </div>
-                    </div>
-
-                </section><!-- /.content -->
          

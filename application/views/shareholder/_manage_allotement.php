@@ -112,7 +112,7 @@ echo "</div>";
 	<?php
     
 
-$result = mysqli_query($conn,"SELECT * FROM shareholders,allotment WHERE shareholders.currentYear_status =1 AND shareholders.account_no = allotment.account_no order by shareholders.account_no");
+$result = mysqli_query($conn,"SELECT * FROM shareholders WHERE shareholders.currentYear_status =1 order by shareholders.account_no");
 
 while($row = mysqli_fetch_array($result))
 {
@@ -156,14 +156,14 @@ while($row = mysqli_fetch_array($result))
 <?php 
 if(isset($_POST['submit'])){
 
-$name = $_POST['name'];										
+//$name = $_POST['name'];										
 $alloted_share= $_POST['alloted_share'];									
-$account_no = $_POST['account_no'];											
+$account_no = $_POST['shareholder'];											
 $alloted_date = $_POST['alloted_date'];
 $due_date = $_POST['due_date'];
 $year = date('Y-m-d');
 
-$select_budget_year = mysqli_query($conn,"SELECT * FROM budget_year WHERE budget_status = 'active'");
+$select_budget_year = mysqli_query($conn,"SELECT * FROM budget_year WHERE budget_status = 1");
 $budget_row = mysqli_fetch_array($select_budget_year);
 $startd = $budget_row['budget_from'];
 $endd = $budget_row['budget_to'];  
@@ -173,9 +173,9 @@ $currentDate = date('Y-m-d', strtotime($currentDate));
 $current_due_date = date('Y-m-d', strtotime($current_due_date));
 $today = date('Y-m-d');
 
-$query_share = mysqli_query($conn,"SELECT * from shareholders where account_no = '$account_no'") or die(mysqli_error($conn));
-$rows_share = mysqli_fetch_array($query_share);
-$subscribed = $rows_share['total_share_subscribed'];
+// $query_share = mysqli_query($conn,"SELECT * from shareholders where account_no = '$account_no'") or die(mysqli_error($conn));
+// $rows_share = mysqli_fetch_array($query_share);
+// $subscribed = $rows_share['total_share_subscribed'];
 
 if(($currentDate < $startd) || ($currentDate > $endd)){
 
@@ -189,12 +189,14 @@ echo '<script>alert("Allotment due date is out of budget year!");</script>';
 
 echo '<script>alert("Due date must be greater than allotment start date!");</script>';
 
-} elseif($alloted_share >=  $subscribed) {
+} 
+// elseif($alloted_share >=  $subscribed) {
 
-    echo '<script>alert("Total alloted share amount must be less than total share subscribed!");</script>';
-} else{
+//     echo '<script>alert("Total alloted share amount must be less than total share subscribed!");</script>';
+// }
+ else{
 
-mysqli_query($conn,"UPDATE allotment set allotment = '$alloted_share',allotment_update = '$alloted_share',allot_year = '$alloted_date',due_date = '$due_date',allot_status = 3 WHERE account = '$account_no'") or die(mysqli_error($conn));
+mysqli_query($conn,"UPDATE allotment set allotment = '$alloted_share',allotment_update = '$alloted_share',allot_date = '$alloted_date',due_date = '$due_date',allot_status = 3 WHERE account = '$account_no'") or die(mysqli_error($conn));
 
 header('location:manage_allotement?share_alloted=paid');								
 

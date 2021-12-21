@@ -101,7 +101,7 @@
         
         <div class="alert alert-danger alert-dismissable" role="alert">
             <div class='message'>
-             The blocked (in birr) amount must be less or equal to the seller total paid up capital (free from plugged and blocked)
+             The blocked (in birr) amount must be less or equal to the seller total paid up capital (free from pledged and blocked)
           </div>
         </div>
         <?php }
