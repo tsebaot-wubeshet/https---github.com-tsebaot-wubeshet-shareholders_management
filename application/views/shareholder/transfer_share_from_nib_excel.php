@@ -4,7 +4,7 @@ $conn=mysqli_connect('localhost','root','','shareholder');
 
 $qryreport = mysqli_query($conn, "SELECT t.buyer_account, s.name, t.total_transfered_in_birr, t.value_date FROM transfer t
 	LEFT JOIN shareholders s
-		ON s.account_no = t.seller_account
+		ON s.account_no = t.buyer_account
 	WHERE t.status_of_transfer = 4 AND t.seller_account = 'NIB' 
 	ORDER BY t.transfer_date DESC") or die(mysqli_error($conn));
 
@@ -30,6 +30,3 @@ $j=8;
       $i++;
   }  
   fclose($output);
-
- 
-?>

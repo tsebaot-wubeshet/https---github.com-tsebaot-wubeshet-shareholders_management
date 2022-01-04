@@ -1,6 +1,6 @@
 <?php
 
-$conn=mysqli_connect('localhost','root','','shareholder'); 
+$conn = mysqli_connect('localhost', 'root', '', 'shareholder');
 
 $this->db->where('budget_status', '1');
 $query = $this->db->get('budget_year');
@@ -19,28 +19,27 @@ LEFT OUTER JOIN share_request sr
 WHERE s.currentYear_status = 1 and b.year = $year
 ORDER BY cast(s.account_no as int) ASC") or die(mysqli_error($conn));
 
-$sqlrows=mysqli_num_rows($qryreport);
+$sqlrows = mysqli_num_rows($qryreport);
 
-$j=8;
+$j = 8;
 
-  $forBreakdown=array();
-  $i=0;
- $date=date("d-m-Y");
-  header('Content-Type: text/csv; charset=utf-8');  
-  header('Content-Disposition: attachment; filename=Shareholders Data '.$date.'.csv');  
-  $output = fopen("php://output", "w"); 
-  fputcsv($output,array('','','','NIB International Bank S.C'));
-  fputcsv($output,array('','','','Shareholders Data')); 
+$forBreakdown = array();
+$i = 0;
+$date = date("d-m-Y");
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=Shareholders Data ' . $date . '.csv');
+$output = fopen("php://output", "w");
+fputcsv($output, array('', '', '', 'NIB International Bank S.C'));
+fputcsv($output, array('', '', '', 'Shareholders Data'));
 
-  fputcsv($output, array('A/C No.', 'Full Name', 'Total Shares Subscribed', 'Total Paid-Up Capital in Birr', 'Allotment', 'Unpaid Balance','Additional share request','City', 'Kifle Ketema', 'Woreda/Kebele', 'House No.', 'P.O. Box', 'Telephone Residence', 'Telephone Office', 'Mobile'));  
+fputcsv($output, array('A/C No.', 'Full Name', 'Total Shares Subscribed', 'Total Paid-Up Capital in Birr', 'Allotment', 'Unpaid Balance', 'Additional share request', 'City', 'Kifle Ketema', 'Woreda/Kebele', 'House No.', 'P.O. Box', 'Telephone Residence', 'Telephone Office', 'Mobile'));
 
-  // $result = mysqli_query($conn, $qryreport);  
-  while($row = mysqli_fetch_assoc($qryreport))  
-  { 
-      fputcsv($output, $row);  
-      $i++;
-  }  
-  fclose($output);
+// $result = mysqli_query($conn, $qryreport);  
+while ($row = mysqli_fetch_assoc($qryreport)) {
+	fputcsv($output, $row);
+	$i++;
+}
+fclose($output);
    
    
 // 	$qryreport = mysqli_query($conn,"SELECT shareholders.id,shareholders.account_no,shareholders.name,shareholders.total_share_subscribed,shareholders.total_paidup_capital_inbirr,new_request.total_share,allotment.allotment,shareholders.city,shareholders.sub_city,Shareholders.woreda,Shareholders.house_no,Shareholders.pobox,Shareholders.telephone_residence,Shareholders.telephone_office,shareholders.mobile FROM shareholders LEFT JOIN allotment ON shareholders.account_no = allotment.account_no LEFT JOIN share_request ON shareholders.account_no = share_request.account_no WHERE shareholders.status = 'active' order by shareholders.account_no ASC") or die(mysqli_error($conn));
@@ -93,4 +92,3 @@ $j=8;
  
   
 // $workbook->close();
-?>

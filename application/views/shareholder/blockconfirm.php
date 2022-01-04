@@ -13,11 +13,11 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Shareholder List
+                        Block Share
 
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="<?php echo base_url().'shareholder/home'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Request</a></li>
                       
                     </ol>

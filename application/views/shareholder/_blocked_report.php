@@ -21,7 +21,7 @@ $conn=mysqli_connect('localhost','root','','shareholder');
     <div class="alert alert-success alert-dismissable">
                                         <i class="fa fa-ban"></i>
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <b>Request Rejected Succesfully!</b> 
+                                        <b>Request Rejected successfully!</b> 
                                     </div>
     <?php } ?>
      <?php
@@ -45,7 +45,7 @@ $conn=mysqli_connect('localhost','root','','shareholder');
   <div class="alert alert-success alert-dismissable">
                                         <i class="fa fa-ban"></i>
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <b>Request Released Succesfully</a>
+                                        <b>Request Released successfully</a>
                                     </div>
   <?php } ?>
 
@@ -73,13 +73,14 @@ $conn=mysqli_connect('localhost','root','','shareholder');
                                                 <th>blocked amount</th>
                                                 <th>blocked type</th>
                                                 <th>Total Paid Up Capital</th>
-                                                <th>remark</th>
+                                                <th>Remark</th>
+                                                <th>Status</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                 
 <?php 
-                        $query = mysqli_query($conn,"SELECT b.*, s.name, bl.total_paidup_capital_inbirr from blocked b left join shareholders s on s.account_no = b.account left join balance bl on bl.account = b.account  where blocked_status not in(10,11) and b.year = 1  order by b.id DESC") or die(mysqli_error($conn));
+                        $query = mysqli_query($conn,"SELECT b.*, s.name, bl.total_paidup_capital_inbirr from blocked b left join shareholders s on s.account_no = b.account left join balance bl on bl.account = b.account  where blocked_status = 5 and b.year = 1  order by b.id DESC") or die(mysqli_error($conn));
                                             
                                                $a = 0;
                                             
@@ -100,26 +101,17 @@ $conn=mysqli_connect('localhost','root','','shareholder');
 
                                                     <?php
                                                     $blocked_status=$rows['blocked_status'];
-                                                     $status_query = mysqli_query($conn,"SELECT * from status where status =$blocked_status") or die(mysqli_error($conn));
+
+                                                     $status_query = mysqli_query($conn,"SELECT * from status where id =$blocked_status") or die(mysqli_error($conn));
                                                      $status_resualt = mysqli_fetch_array($status_query);
                                                       $status=$status_resualt?$status_resualt['status']:"";
-                                                    if($rows['blocked_status'] == 7){
+
                                                         
                                                         ?>
                                                         
                                                         <span class="badge bg-red"><?php echo $status; ?></span>
                                                         
-                                                        <?php
                                                         
-                                                    } else {
-                                                        
-                                                        ?>
-                                                        
-                                                        <span class="badge bg-red"><?php echo $status; ?></span>
-                                                        
-                                                        <?php
-                                                        
-                                                        }?>
                                                 
                                                 
                                                         </td>

@@ -82,7 +82,7 @@
           ?>
     <div class="alert alert-success alert-dismissable" role="alert">
     <div class='message'>
-    Share blocked succesfully
+    Share blocked successfully
     </div>
       </div> 
           <?php
@@ -164,7 +164,7 @@
           ?>
         <div class="form-group">
             
-            <label>blocked From </label>
+            <label>Blocked From </label>
             <div class="form-group">
                 <label>Account No</label>
             <input type="text" required readonly name="account" autofocus class="form-control" value="<?php echo $row['account_no']; ?>">
@@ -214,15 +214,15 @@
         </div>    
                 <div class="form-group">
                     
-                    <label>Transfer to</label> 
+                    <label>Block Type</label> 
                     <select name="blocked_type" required id="select_blockedType" class="form-control" onchange="blockedAmount(this.value)">
                       <option>--select Blocked Type--</option>
-                      <option value="full">block Fully</option>
-                      <option value="partial">block partially</option>
+                      <option value="full">Block Fully</option>
+                      <option value="partial">Block Bartially</option>
                   </select>
               </div> 
                                        <div style="display: none;" class="form-group"  id='dv_amount'>
-                                            <label>blocked amount in birr</label>
+                                            <label>Blocked amount in birr</label>
                                             <input type="text" name="blocked_amount"  value="" id="input_amount" class="form-control" placeholder="Enter ..."/>
                                  			<?php echo form_error('blocked_amount'); ?>
                                         </div>
@@ -234,13 +234,13 @@
                                             <?php echo form_error('reason'); ?>
                                         </div>
                                          <div class="form-group">
-                                            <label>blocked Letter Rf No</label>
+                                            <label>Blocked Letter Rf No</label>
                                             <input type="text" name="rf_no"  value="" class="form-control" placeholder="Enter ..."/>
                                  		   	<?php echo form_error('rf_no'); ?>
                                         </div>
                                         <div class="box-footer">
                                      
-                                        <button type="submit" class="btn btn-primary" name="blocksubmit">block Shareholder</button>
+                                        <button type="submit" class="btn btn-primary" name="blocksubmit">Block Shareholder</button>
                                     </div>
                                     
                                     

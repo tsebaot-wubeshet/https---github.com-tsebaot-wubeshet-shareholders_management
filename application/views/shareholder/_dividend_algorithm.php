@@ -266,4 +266,3 @@
             mysqli_query($conn,"INSERT INTO ratio_dividend (account,ratio,dividend_portion,year) values($accountNum,$ratio,$dividend_portion,$year) ON DUPLICATE KEY UPDATE ratio=values(ratio),dividend_portion=values(dividend_portion)")or die(mysqli_error($conn));
         }
     // }
-        ?>

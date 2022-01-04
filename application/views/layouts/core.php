@@ -98,7 +98,7 @@ a {
                                     <h3>               
                     <?php
 
-                            $query = mysqli_query($conn,"SELECT count(id) from shareholders where share_type = 'edir' AND currentYear_status = 1") or die(mysqli_error($conn));
+                            $query = mysqli_query($conn,"SELECT count(id) from shareholders where share_type = 3 AND currentYear_status = 1") or die(mysqli_error($conn));
 
                             while($row = mysqli_fetch_array($query)){
 
@@ -132,7 +132,7 @@ a {
                                     <h3>               
                     <?php
 
-                            $query = mysqli_query($conn,"SELECT count(id) from shareholders where share_type = 'church' AND currentYear_status = 1") or die(mysqli_error($conn));
+                            $query = mysqli_query($conn,"SELECT count(id) from shareholders where share_type = 4 AND currentYear_status = 1") or die(mysqli_error($conn));
 
                             while($row = mysqli_fetch_array($query)){
 

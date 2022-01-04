@@ -120,4 +120,3 @@ function convert_number_to_words($number) {
    
     return $string;
 }
-?>

@@ -1,34 +1,33 @@
 <?php
 
 
-$conn=mysqli_connect('localhost','root','','shareholder'); 
+$conn = mysqli_connect('localhost', 'root', '', 'shareholder');
 
 $qryreport = mysqli_query($conn, "SELECT s.account_no, s.name, b.total_paidup_capital_inbirr, 'Closed', s.closed_date FROM shareholders s 
 LEFT JOIN balance b 
   ON b.account = s.account_no
 WHERE s.currentYear_status = 2 ORDER BY s.closed_date DESC") or die(mysqli_error($conn));
 
-$sqlrows=mysqli_num_rows($qryreport);
+$sqlrows = mysqli_num_rows($qryreport);
 
-$j=8;
+$j = 8;
 
-  $forBreakdown=array();
-  $i=0;
- $date=date("d-m-Y");
-  header('Content-Type: text/csv; charset=utf-8');  
-  header('Content-Disposition: attachment; filename=Closed Report '.$date.'.csv');  
-  $output = fopen("php://output", "w"); 
-  fputcsv($output,array('','','NIB International Bank S.C'));
-  fputcsv($output,array('','','Closed Report')); 
+$forBreakdown = array();
+$i = 0;
+$date = date("d-m-Y");
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=Closed Report ' . $date . '.csv');
+$output = fopen("php://output", "w");
+fputcsv($output, array('', '', 'NIB International Bank S.C'));
+fputcsv($output, array('', '', 'Closed Report'));
 
-  fputcsv($output, array('A/C No.', 'Shareholder Name', 'Total Paid-Up Capital(in birr)', 'Shareholder Status', 'Closed Date'));  
+fputcsv($output, array('A/C No.', 'Shareholder Name', 'Total Paid-Up Capital(in birr)', 'Shareholder Status', 'Closed Date'));
 
-  while($row = mysqli_fetch_assoc($qryreport))  
-  { 
-      fputcsv($output, $row);  
-      $i++;
-  }  
-  fclose($output);
+while ($row = mysqli_fetch_assoc($qryreport)) {
+	fputcsv($output, $row);
+	$i++;
+}
+fclose($output);
 
 
 //   require_once('OLEwriter.php');
@@ -160,4 +159,3 @@ $j=8;
 // /////////////////
   
 // $workbook->close();
-?>

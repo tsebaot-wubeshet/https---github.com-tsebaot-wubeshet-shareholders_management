@@ -4,5 +4,3 @@
 	$num3 = $_GET['dividend_cap'];
 	$num4 = $num1 + $num2 + $num3;
 	echo $num4;
-?>
-

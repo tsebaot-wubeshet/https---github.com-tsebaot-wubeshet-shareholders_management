@@ -1,1 +1,1 @@
-<?php echo "succesfully submited data"; ?>
+<?php echo "successfully submitted data"; ?>

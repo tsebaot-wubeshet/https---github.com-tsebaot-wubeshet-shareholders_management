@@ -40,8 +40,9 @@ $conn=mysqli_connect('localhost','root','','shareholder');
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            	<th></th>
-                                            	<th></th>
+                                                <?php if($role == 3) { ?>
+                                                    <th></th>
+                                                <?php } ?>
                                                 <th>No.</th>
                                                 <th>Account number</th>
                                                 <th>Shareholder Name</th>
@@ -58,7 +59,7 @@ $conn=mysqli_connect('localhost','root','','shareholder');
                 
                                         	<?php
                                         	
-                                        	$query = mysqli_query($conn,"SELECT * from blocked left outer join shareholders on blocked.account = shareholders.account_no where blocked.blocked_status in(5,8)  order by blocked.id ASC") or die(mysqli_error($conn));
+                                        	$query = mysqli_query($conn,"SELECT * from blocked left outer join shareholders on blocked.account = shareholders.account_no where blocked.blocked_status = 7 || blocked.blocked_status = 8  order by blocked.id ASC") or die(mysqli_error($conn));
                                         	$a = 0;
                                         	
                                         	while ($rows = mysqli_fetch_array($query)) {
@@ -68,8 +69,9 @@ $conn=mysqli_connect('localhost','root','','shareholder');
                                                 $status = mysqli_fetch_array($query2);
                                         	?>
                                             <tr>
-                                            	<td></td>
-                                            	<td><input type="checkbox" name="applist[]" value="<?php echo $rows['id'];?>"></td>
+                                                <?php if($role == 3) { ?>
+                                            	    <td><input type="checkbox" name="applist[]" value="<?php echo $rows['id'];?>"></td>
+                                                <?php } ?>
                                             	<td><?php echo $a; ?></td>
                                                 <td><?php echo $rows['account']; ?></td>
                                                 <td><?php echo $rows['name']; ?></td>                                                                                         
